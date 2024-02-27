@@ -7,9 +7,9 @@
 #include "fwmvcdef.ch"
 
  
-WSRESTFUL listasrc DESCRIPTION "Listar Registro Controle De Alcada" FORMAT APPLICATION_JSON
+WSRESTFUL listasrc DESCRIPTION "Controle De Alcada" FORMAT APPLICATION_JSON
  
-    WSMETHOD GET   listasrc DESCRIPTION 'Controle De Alcada'      WSSYNTAX '/listasrc' PATH '/listasrc' PRODUCES APPLICATION_JSON
+    WSMETHOD GET   listasrc DESCRIPTION 'Listar Controle De Alcada'      WSSYNTAX '/listasrc' PATH '/listasrc' PRODUCES APPLICATION_JSON
 END WSRESTFUL
  
  
@@ -32,7 +32,6 @@ cQuery += " FROM " + RetSqlName("SCR") + " SCR "
 cQuery += " INNER JOIN " + RetSqlName("DBM") + " DBM ON DBM_FILIAL = CR_FILIAL AND DBM_NUM = CR_NUM AND DBM.D_E_L_E_T_ = '' "
 cQuery += " LEFT  JOIN " + RetSqlName("SC1") + " SC1 ON CR_TIPO = 'SC' AND C1_FILIAL = DBM_FILIAL AND C1_NUM = DBM_NUM AND C1_ITEM = DBM_ITEM AND SC1.D_E_L_E_T_ = '' "
 cQuery += " LEFT  JOIN " + RetSqlName("SC7") + " SC7 ON CR_TIPO = 'PC' AND C7_FILIAL = DBM_FILIAL AND C7_NUM = DBM_NUM AND C7_ITEM = DBM_ITEM AND SC1.D_E_L_E_T_ = '' "
-cQuery += " WHERE CR_NUM = '000290'
 cQuery += " AND CR_APROV = '" + Alltrim(oJson:GetJsonObject('CR_APROV')) + "' "
 cQuery += " AND SCR.D_E_L_E_T_ = ''
 
