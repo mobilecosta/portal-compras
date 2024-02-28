@@ -9,12 +9,12 @@
  
 WSRESTFUL listasrc DESCRIPTION "Controle De Alcada" FORMAT APPLICATION_JSON
  
-    WSMETHOD GET   listasrc DESCRIPTION 'Listar Controle De Alcada'      WSSYNTAX '/listasrc' PATH '/listasrc' PRODUCES APPLICATION_JSON
+    WSMETHOD POST  listasrc DESCRIPTION 'Listar Controle De Alcada'      WSSYNTAX '/listasrc' PATH '/listasrc' PRODUCES APPLICATION_JSON
 END WSRESTFUL
  
  
 ****************************************************** 
-WSMETHOD GET listasrc WSRECEIVE  WSREST listasrc
+WSMETHOD POST listasrc WSRECEIVE  WSREST listasrc
 
 Local cJson    := Self:GetContent()
 Local cJsonRet := ''
