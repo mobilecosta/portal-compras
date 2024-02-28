@@ -16,8 +16,9 @@ END WSRESTFUL
 ****************************************************** 
 WSMETHOD GET listasrc WSRECEIVE  WSREST listasrc
 
-Local cJson         := Self:GetContent()
-Local cJsonRet      := ''
+Local cJson    := Self:GetContent()
+Local cJsonRet := ''
+Local nItems   := 0
 
 Self:SetContentType("application/json")
 oJson   := JsonObject():New()
@@ -37,15 +38,17 @@ cQuery += " AND CR_APROV = '" + Alltrim(oJson:GetJsonObject('CR_APROV')) + "' "
 cQuery += " AND SCR.D_E_L_E_T_ = ''
 
 cQrySCR := GetNextAlias()
-cJsonRet := '{'
+cJsonRet := '{"alcadas": { "items": [{'
 
 dbUseArea(.T.,"TOPCONN",TcGenQry(,,cQuery),cQrySCR,.F.,.T.) 
 DbSelectArea(cQrySCR)
 (cQrySCR)->(DbGoTop())
 
 While ( cQrySCR )->( ! Eof() )
-    cJsonRet += IIF(cJsonRet=='{','[',',[') 
-    cJsonRet += '"Status": "'+( cQrySCR )->CR_STATUS+'",' 
+    If nItems > 0
+        cJsonRet += ","
+    EndIf
+    cJsonRet += '["Status": "'+( cQrySCR )->CR_STATUS+'",' 
     cJsonRet += '"Tipo": "'+( cQrySCR )->CR_TIPO+'",' 
     cJsonRet += '"DsTipo": "'+IIF(( cQrySCR )->CR_TIPO=='SC','Solicitacao Pedido','Pedido De Compra')+'",' 
     cJsonRet += '"id":  "'+Alltrim(( cQrySCR )->CR_NUM)+'",'
@@ -74,9 +77,10 @@ While ( cQrySCR )->( ! Eof() )
     EndIf
     cJsonRet += ']'
     DbSelectArea(cQrySCR)
+    nItems ++
     (cQrySCR)->(DBSkip())
 End
-cJsonRet += '}'
+cJsonRet += '}}}'
  
 Self:SetResponse(cJsonRet)
 Return(.T.)
