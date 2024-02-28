@@ -48,7 +48,7 @@ While ( cQrySCR )->( ! Eof() )
     cJsonRet += '"Status": "'+( cQrySCR )->CR_STATUS+'",' 
     cJsonRet += '"Tipo": "'+( cQrySCR )->CR_TIPO+'",' 
     cJsonRet += '"DsTipo": "'+IIF(( cQrySCR )->CR_TIPO=='SC','Solicitacao Pedido','Pedido De Compra')+'",' 
-    cJsonRet += '"Num":  "'+Alltrim(( cQrySCR )->CR_NUM)+'",'
+    cJsonRet += '"id":  "'+Alltrim(( cQrySCR )->CR_NUM)+'",'
     cJsonRet += '"User": "'+( cQrySCR )->CR_USER+'",'
     cJsonRet += '"Aprov": "'+( cQrySCR )->CR_APROV+'",'
     cJsonRet += '"Nivel": "'+( cQrySCR )->CR_NIVEL+'",'
