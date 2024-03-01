@@ -27,7 +27,7 @@ cQuery += " LEFT  JOIN " + RetSqlName("SC7") + " SC7 ON CR_TIPO = 'PC' AND C7_FI
 cQuery += " WHERE CR_FILIAL = '" + xFilial("SCR") + "' AND CR_TIPO IN ('SC', 'PC') AND CR_APROV = '" + Alltrim(cId) + "' AND SCR.D_E_L_E_T_ = ''
 
 cQrySCR := GetNextAlias()
-cJsonRet := '{"alcadas": { "items": [{'
+cJsonRet := '{"alcadas": { "items": [['
 
 dbUseArea(.T.,"TOPCONN",TcGenQry(,,cQuery),cQrySCR,.F.,.T.) 
 DbSelectArea(cQrySCR)
@@ -37,7 +37,7 @@ While ( cQrySCR )->( ! Eof() )
     If nItems > 0
         cJsonRet += ","
     EndIf
-    cJsonRet += '["Status": "'+( cQrySCR )->CR_STATUS+'",' 
+    cJsonRet += '{"Status": "'+( cQrySCR )->CR_STATUS+'",' 
     cJsonRet += '"Tipo": "'+( cQrySCR )->CR_TIPO+'",' 
     cJsonRet += '"DsTipo": "'+IIF(( cQrySCR )->CR_TIPO=='SC','Solicitacao Pedido','Pedido De Compra')+'",' 
     cJsonRet += '"id":  "'+Alltrim(( cQrySCR )->CR_NUM)+'",'
@@ -66,12 +66,12 @@ While ( cQrySCR )->( ! Eof() )
         cJsonRet += '"Descri": "'+SC7->C7_DESCRI+'",'
         cJsonRet += '"Quant": '+Str(SC7->C7_QUANT)
     EndIf
-    cJsonRet += ']'
+    cJsonRet += '}'
     DbSelectArea(cQrySCR)
     nItems ++
     (cQrySCR)->(DBSkip())
 End
-cJsonRet += '}}}'
+cJsonRet += ']}}'
 
 Self:SetContentType("application/json")
 Self:SetResponse(cJsonRet)
@@ -110,7 +110,7 @@ EndIf
 cQuery += " WHERE CR_FILIAL = '" + xFilial("SCR") + "' AND CR_TIPO = '" + cTabela + "' AND CR_NUM = '" + cId + "' AND SCR.D_E_L_E_T_ = ''
 
 cQrySCR := GetNextAlias()
-cJsonRet := '{"alcadas": { "items": [{'
+cJsonRet := '{"alcadas": { "items": [['
 
 dbUseArea(.T.,"TOPCONN",TcGenQry(,,cQuery),cQrySCR,.F.,.T.) 
 DbSelectArea(cQrySCR)
@@ -120,7 +120,7 @@ While ( cQrySCR )->( ! Eof() )
     If nItems > 0
         cJsonRet += ","
     EndIf
-    cJsonRet += '["Status": "'+( cQrySCR )->CR_STATUS+'",' 
+    cJsonRet += '{"Status": "'+( cQrySCR )->CR_STATUS+'",' 
     cJsonRet += '"Tipo": "'+( cQrySCR )->CR_TIPO+'",' 
     cJsonRet += '"DsTipo": "'+IIF(( cQrySCR )->CR_TIPO=='SC','Solicitacao Pedido','Pedido De Compra')+'",' 
     cJsonRet += '"id":  "'+Alltrim(( cQrySCR )->CR_NUM)+'",'
@@ -147,12 +147,12 @@ While ( cQrySCR )->( ! Eof() )
         cJsonRet += '"Descri": "'+SC7->C7_DESCRI+'",'
         cJsonRet += '"Quant": '+Str(SC7->C7_QUANT)
     EndIf
-    cJsonRet += ']'
+    cJsonRet += '}'
     DbSelectArea(cQrySCR)
     nItems ++
     (cQrySCR)->(DBSkip())
 End
-cJsonRet += '}}}'
+cJsonRet += ']}}'
 
 Self:SetContentType("application/json")
 Self:SetResponse(cJsonRet)
