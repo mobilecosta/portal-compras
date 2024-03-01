@@ -50,7 +50,7 @@ While ( cQrySCR )->( ! Eof() )
     If ( cQrySCR )->SC1REG > 0 
         DbSelectArea('SC1')
         DbGoto(( cQrySCR )->SC1REG)
-        cJsonRet += ',"Tabela": "SC",'
+        cJsonRet += ',"Tabela": "SC"'
         cJsonRet += ',"Item": "'+Alltrim(SC1->C1_ITEM)+'",'
         cJsonRet += '"Produto": "'+Alltrim(SC1->C1_PRODUTO)+'",'
         cJsonRet += '"Um": "'+SC1->C1_UM+'",'
@@ -59,7 +59,7 @@ While ( cQrySCR )->( ! Eof() )
     ElseIf ( cQrySCR )->SC7REG > 0  
         DbSelectArea('SC7')
         DbGoto(( cQrySCR )->SC7REG)
-        cJsonRet += ',"Tabela": "PC",'
+        cJsonRet += ',"Tabela": "PC"'
         cJsonRet += ',"Item": "'+SC7->C7_ITEM+'",'
         cJsonRet += '"Produto": "'+SC7->C7_PRODUTO+'",'
         cJsonRet += '"Um": "'+SC7->C7_UM+'",'
