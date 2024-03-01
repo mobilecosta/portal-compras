@@ -27,7 +27,7 @@ cQuery += " LEFT  JOIN " + RetSqlName("SC7") + " SC7 ON CR_TIPO = 'PC' AND C7_FI
 cQuery += " WHERE CR_FILIAL = '" + xFilial("SCR") + "' AND CR_TIPO IN ('SC', 'PC') AND CR_APROV = '" + Alltrim(cId) + "' AND SCR.D_E_L_E_T_ = ''
 
 cQrySCR := GetNextAlias()
-cJsonRet := '{"alcadas": { "items": [['
+cJsonRet := '{"alcadas": { "items": ['
 
 dbUseArea(.T.,"TOPCONN",TcGenQry(,,cQuery),cQrySCR,.F.,.T.) 
 DbSelectArea(cQrySCR)
@@ -110,7 +110,7 @@ EndIf
 cQuery += " WHERE CR_FILIAL = '" + xFilial("SCR") + "' AND CR_TIPO = '" + cTabela + "' AND CR_NUM = '" + cId + "' AND SCR.D_E_L_E_T_ = ''
 
 cQrySCR := GetNextAlias()
-cJsonRet := '{"alcadas": { "items": [['
+cJsonRet := '{"alcadas": { "items": ['
 
 dbUseArea(.T.,"TOPCONN",TcGenQry(,,cQuery),cQrySCR,.F.,.T.) 
 DbSelectArea(cQrySCR)
